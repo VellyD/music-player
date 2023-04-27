@@ -1,7 +1,35 @@
+const img = document.querySelector("img");
+const title = document.getElementById("title");
+const artist = document.getElementById("artist");
+
 const audioElement = document.querySelector("audio");
 const prevBtn = document.getElementById("prev");
 const playBtn = document.getElementById("play");
 const nextBtn = document.getElementById("next");
+
+// Songs
+const songs = [
+  {
+    name: "jacinto-1",
+    displayName: "Electric Chill Machine",
+    artist: "Jacinto Design",
+  },
+  {
+    name: "jacinto-2",
+    displayName: "Seven Mation Army (remix)",
+    artist: "Jacinto Design",
+  },
+  {
+    name: "jacinto-3",
+    displayName: "Chill Grill",
+    artist: "Jacinto Design",
+  },
+  {
+    name: "metric-1",
+    displayName: "The Machine",
+    artist: "Jacinto Design",
+  },
+];
 
 // Check if playing
 let isPlaying = false;
@@ -23,3 +51,14 @@ function pauseSong() {
 // Event Listener
 
 playBtn.addEventListener("click", () => (isPlaying ? pauseSong() : playSong()));
+
+// Update the DOM
+function loadingSong(song) {
+  title.textContent = song.displayName;
+  artist.textContent = song.artist;
+  audioElement.src = `music/${song.name}.mp3`;
+  img.src = `img/${song.name}.jpg`;
+}
+
+// Onload select first song
+loadingSong(songs[3]);
