@@ -60,5 +60,30 @@ function loadingSong(song) {
   img.src = `img/${song.name}.jpg`;
 }
 
+let songIndex = 0;
+
+function nextSong() {
+  songIndex++;
+  if (songIndex > songs.length - 1) {
+    songIndex = 0;
+  }
+  loadingSong(songs[songIndex]);
+  playSong();
+}
+
+function prevSong() {
+  songIndex--;
+
+  if (songIndex < 0) {
+    songIndex = songs.length - 1;
+  }
+
+  loadingSong(songs[songIndex]);
+  playSong();
+}
+
 // Onload select first song
-loadingSong(songs[3]);
+loadingSong(songs[songIndex]);
+
+prevBtn.addEventListener("click", prevSong);
+nextBtn.addEventListener("click", nextSong);
