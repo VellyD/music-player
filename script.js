@@ -3,6 +3,9 @@ const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 
 const audioElement = document.querySelector("audio");
+const progressContainer = document.getElementById("progress-container");
+const progress = document.getElementById("progress");
+
 const prevBtn = document.getElementById("prev");
 const playBtn = document.getElementById("play");
 const nextBtn = document.getElementById("next");
@@ -85,5 +88,16 @@ function prevSong() {
 // Onload select first song
 loadingSong(songs[songIndex]);
 
+// Update the Progress bar
+function updateProgressBar(e) {
+  if (isPlaying) {
+    const { duration, currentTime } = e.srcElement;
+
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = `${progressPercent}%`;
+  }
+}
+
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
+audioElement.addEventListener("timeupdate", updateProgressBar);
